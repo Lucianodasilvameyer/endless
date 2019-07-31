@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags: []
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: ossos
+    uniqueID: 3279663103
+    locked: 0
+  - name: ossos2
+    uniqueID: 3571507287
+    locked: 0
+  - name: ossos3
+    uniqueID: 2793364801
+    locked: 0
+  - name: ossos4
+    uniqueID: 3254140807
+    locked: 0
+  - name: canvas
+    uniqueID: 2443818017
+    locked: 0
