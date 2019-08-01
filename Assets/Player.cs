@@ -12,10 +12,16 @@ public class Player : MonoBehaviour
     float jumpForce;
     Rigidbody2D body;
 
+    [SerializeField]
+    Game game_Ref;
+
     // Start is called before the first frame update
     void Start()
     {
-        if(!body || body == null)   //aqui verifica se o rigdbody tem uma referencia ou não(apontando para uma classe e ganhando dados)
+        if (!game_Ref || game_Ref == null)   //aqui verifica se o rigdbody tem uma referencia ou não(apontando para uma classe e ganhando dados)
+            game_Ref = GameObject.FindGameObjectWithTag("Game"). GetComponent<Game>();
+
+        if (!body || body == null)   //aqui verifica se o rigdbody tem uma referencia ou não(apontando para uma classe e ganhando dados)
         body = GetComponent<Rigidbody2D>();
     }
 
@@ -37,7 +43,7 @@ public class Player : MonoBehaviour
 
         
 #else
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && game_Ref.isGameOver() == false)
         {
             Jump();
         }
@@ -48,7 +54,8 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Movimento();
+        if (game_Ref.isGameOver() == false)
+            Movimento();
     }
     public void Movimento()
     {
@@ -68,5 +75,13 @@ public class Player : MonoBehaviour
     {
         Vector2 velocity = new Vector2(body.velocity.x, jumpForce);//aqui no movimento o body.velocity.x serve para manter a velocidade do x
         body.velocity = velocity;
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Inimigo"))
+        {
+            game_Ref.GameOver();
+           
+        }
     }
 }   
