@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Background.cs" />
+    <Compile Include="Assets\CameraScript.cs" />
     <Compile Include="Assets\Game.cs" />
     <Compile Include="Assets\Ground.cs" />
     <Compile Include="Assets\Inimigo.cs" />

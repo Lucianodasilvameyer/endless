@@ -7,11 +7,7 @@ public class Inimigo : MonoBehaviour
     [SerializeField]
     Game game_ref;
 
-    [SerializeField]
-    private float TempoDeAtaqueInicial;
-
-    [SerializeField]
-    private float TempoDeAtaqueFinal;
+    
 
     [SerializeField]
     private Transform target;
@@ -35,11 +31,7 @@ public class Inimigo : MonoBehaviour
     {
         Mover();
 
-        if(Time.time>=TempoDeAtaqueInicial+TempoDeAtaqueFinal)
-        {
-            TempoDeAtaqueInicial = Time.time;
-
-        }  
+        
 
 
 

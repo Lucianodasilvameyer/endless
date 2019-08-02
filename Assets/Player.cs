@@ -11,6 +11,10 @@ public class Player : MonoBehaviour
     [SerializeField]
     float jumpForce;
     Rigidbody2D body;
+    bool isGrounded;
+
+    [SerializeField]
+   bool invencivel;
 
     [SerializeField]
     Game game_Ref;
@@ -43,7 +47,7 @@ public class Player : MonoBehaviour
 
         
 #else
-        if (Input.GetKeyDown(KeyCode.Space) && game_Ref.isGameOver() == false)
+        if (Input.GetKeyDown(KeyCode.Space) && game_Ref.isGameOver() == false && isGrounded)
         {
             Jump();
         }
@@ -80,8 +84,26 @@ public class Player : MonoBehaviour
     {
         if(collision.CompareTag("Inimigo"))
         {
+            if(!invencivel)
             game_Ref.GameOver();
            
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = true;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = false;
+        }
+    }
+
 }   
