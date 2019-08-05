@@ -5,16 +5,19 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField]
-     float speed;
+    float speed;
     [SerializeField]
     float acceleration;
     [SerializeField]
     float jumpForce;
+
+    [SerializeField]
     Rigidbody2D body;
+
     bool isGrounded;
 
     [SerializeField]
-   bool invencivel;
+    bool invencivel;
 
     [SerializeField]
     Game game_Ref;
@@ -22,7 +25,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (!game_Ref || game_Ref == null)   //aqui verifica se o rigdbody tem uma referencia ou não(apontando para uma classe e ganhando dados)
+        if (!game_Ref || game_Ref == null)   //aqui verifica se o Game tem uma referencia ou não(apontando para uma classe e ganhando dados)
             game_Ref = GameObject.FindGameObjectWithTag("Game"). GetComponent<Game>();
 
         if (!body || body == null)   //aqui verifica se o rigdbody tem uma referencia ou não(apontando para uma classe e ganhando dados)

@@ -50,7 +50,7 @@ public class Game : MonoBehaviour
           
             nextPositionBG.x += go.GetComponent<SpriteRenderer>().bounds.size.x;  //aqui a função bounds.size é o tamanho do objeto e para utiliza-la deve-se usar o go.GetComponent<SpriteRenderer>() antes  e o primeiro x é porque só quer trabalhar com o x
                                                                                   //este  nextPositionBG influencia dentro do instantiate de cima;                                                                      
-                                                                                  //o nextPositionBG.x começa em zero e o += serve para ir adicionando o tamanho do sprit?
+                                                                                  //o nextPositionBG.x começa em zero e o += serve para ir adicionando o tamanho do sprite?
 
 
             go = Instantiate(groundPrefab, nextPositionGR, Quaternion.identity);
@@ -83,7 +83,7 @@ public class Game : MonoBehaviour
 
             Vector2 initialPos = player_ref.transform.position;
             initialPos.x += distanceEnemyFromPlayer;
-            initialPos.y = groundLevel;
+            initialPos.y = groundLevel;// aqui o y é sempre o mesmo
 
 
 
@@ -99,10 +99,10 @@ public class Game : MonoBehaviour
 
         for(int i = 0; i < quantidadeIinimigos;i++)
         {
-            int index = Random.Range(0, inimigoPrefabs.Length);
-            Vector3 position = initialPos;
+            int index = Random.Range(0, inimigoPrefabs.Length);//de zero ao tamanho do inimigoPrefabs?
+            Vector3 position = initialPos;  //pq mecher com vector3 se este jogo é 2d?
             position.x += i * distance;
-            position.z = -1f;
+            position.z = -1f;  //-1f pq o z é sempre o mesmo?
             GameObject go = Instantiate(inimigoPrefabs[index], position, Quaternion.identity);
 
 
