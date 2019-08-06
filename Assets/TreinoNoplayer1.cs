@@ -2,13 +2,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TreinoNoplayer1 : MonoBehaviour
+public class TreinoNoPlayer1 : MonoBehaviour
 {
     [SerializeField]
-    Game game_ref;]
+    private float spawnarEspadaInicial;
 
-    bool estaNoChao; 
+    bool recarregar = false;
 
+    Game game_ref;
+
+    [SerializeField]
+    private float spawnarEspadaMax;
+
+    public GameObject EspadaPrefab;
+
+    [SerializeField]
+    private float distanciaChaoEspada; 
+
+    [SerializeField]
+    private float speed;
+
+    [SerializeField]
+    private float jumpForce;
+
+    [SerializeField]
+    Rigidbody2D corpo;
+
+    [SerializeField]
+    bool invencivel;
+
+    [SerializeField]
+    bool isGrounded;//esta no chão? //sem true ou false é true?
 
     // Start is called before the first frame update
     void Start()
@@ -19,25 +43,97 @@ public class TreinoNoplayer1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.touches.Length==1)//Input.touches.Length=atualização q um dedo executou num quadro mais recente
+      
+        if(Input.touches.Length==1)
         {
-            if (Input.touches[0].phase == TouchPhase.Began || Input.touches[0].phase == TouchPhase.Stationary)//TouchPhase.Began = um dedo tocou a tela
-            {                                                                                                 //TouchPhase.Stationary= Um dedo está tocando na tela, mas não se moveu.
-                Pular();
-
+            if (Input.touches[0].phase == TouchPhase.Began || Input.touches[0].phase == TouchPhase.Stationary)
+            {
+                Jump();
             }
-                                                             
+            else if(Input.touches[0].phase==TouchPhase.Moved)
+            {
+                SpawnarEspada();
+            }  
         }
 
-#if UNITY_ANDROID
+#if UNITY_ANDROID//colocado depois?
 
 #else
-        if(Input.GetKeyDown(KeyCode.Space) && game_ref.isGameOver()==false && estaNoChao)//sem false ou true o estaNoChao é true?
+        
+        
+        if(isGrounded==true && Input.GetKeyDown(KeyCode.Escape) && game_ref.isGameOver()==false)
         {
-            Pular();
+            Jump();
+        }
+         
+
+        if(Time.time>=spawnarEspadaInicial+spawnarEspadaMax && recarregar==true)
+        {
+            spawnarEspadaInicial = Time.time;
+        } 
+        else if(Input.GetKeyDown(KeyCode.P) && game_ref.isGameOver()==false && recarregar==false)
+        {
+            SpawnarEspada();
         }
 
 
+#endif
 
+    }
+    private void FixedUpdate()
+    {
+        if (game_ref.isGameOver() == false)
+            Movimento();      
+    }
+    public void Movimento()
+    {
+        Vector2 Input = new Vector2(1, 0);
+        Vector2 Direction = Input.normalized;
+        Vector2 Velocity = speed * Direction;
+        Velocity.y = corpo.velocity.y;
+        corpo.velocity = Velocity;
+
+    }
+    public void Jump()
+    {
+        Vector2 velocity = new Vector2(corpo.velocity.x, jumpForce);
+        corpo.velocity = velocity;
+
+    }
+    private void OnTriggerEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("inimigo"))
+        {
+            if (!invencivel)
+                game_ref.GameOver();   
+        }  
+    }
+    //public void GameOver()
+    //{
+    // gameOver = true;
+    //player_ref.getcomponent<SpriteRenderer>().enable = false;
+    //}
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+       if(collision.gameObject.CompareTag("Ground"))
+       {
+            isGrounded = true;
+       }      
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = false;
+        }
+    }
+    public void SpawnarEspada(int distanciaPlayerEspada)
+    {
+        Vector2 posicaoInicial = transform.position;
+        Vector2 position = posicaoInicial;
+        position.x += distanciaPlayerEspada;
+        position.y = distanciaChaoEspada;
+
+        GameObject du = Instantiate(EspadaPrefab, position, Quaternion.identity);
     }
 }

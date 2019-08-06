@@ -20,7 +20,7 @@ public class Game : MonoBehaviour
     public GameObject BackGroundPrefab;
     public GameObject groundPrefab;
 
-    public Player player_ref;// o Player é o script
+    public Game player_ref;// o Player é o script
 
     [SerializeField]
     float distanceEnemyFromPlayer;

@@ -456,6 +456,75 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1001 &7038149301856406162
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7038149303378348650, guid: a43c7b4c34322d54c9239d4e75770d66,
+        type: 3}
+      propertyPath: m_Name
+      value: Espada
+      objectReference: {fileID: 0}
+    - target: {fileID: 7038149303378348648, guid: a43c7b4c34322d54c9239d4e75770d66,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.035623
+      objectReference: {fileID: 0}
+    - target: {fileID: 7038149303378348648, guid: a43c7b4c34322d54c9239d4e75770d66,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.8520014
+      objectReference: {fileID: 0}
+    - target: {fileID: 7038149303378348648, guid: a43c7b4c34322d54c9239d4e75770d66,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7038149303378348648, guid: a43c7b4c34322d54c9239d4e75770d66,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7038149303378348648, guid: a43c7b4c34322d54c9239d4e75770d66,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7038149303378348648, guid: a43c7b4c34322d54c9239d4e75770d66,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7038149303378348648, guid: a43c7b4c34322d54c9239d4e75770d66,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7038149303378348648, guid: a43c7b4c34322d54c9239d4e75770d66,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7038149303378348648, guid: a43c7b4c34322d54c9239d4e75770d66,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7038149303378348648, guid: a43c7b4c34322d54c9239d4e75770d66,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7038149303378348648, guid: a43c7b4c34322d54c9239d4e75770d66,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a43c7b4c34322d54c9239d4e75770d66, type: 3}
 --- !u!1001 &8525675407781650968
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -523,5 +592,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8525675406698924164, guid: c4e12d467dfd91a41b5d28ec581e39fb,
+        type: 3}
+      propertyPath: EspadaPrefab
+      value: 
+      objectReference: {fileID: 7038149303378348650, guid: a43c7b4c34322d54c9239d4e75770d66,
+        type: 3}
+    - target: {fileID: 8525675406698924164, guid: c4e12d467dfd91a41b5d28ec581e39fb,
+        type: 3}
+      propertyPath: spawnarEspadaInicial
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8525675406698924164, guid: c4e12d467dfd91a41b5d28ec581e39fb,
+        type: 3}
+      propertyPath: spawnarEspadaMax
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8525675406698924164, guid: c4e12d467dfd91a41b5d28ec581e39fb,
+        type: 3}
+      propertyPath: recarregar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8525675406698924164, guid: c4e12d467dfd91a41b5d28ec581e39fb,
+        type: 3}
+      propertyPath: game_Ref
+      value: 
+      objectReference: {fileID: 1494303230}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c4e12d467dfd91a41b5d28ec581e39fb, type: 3}

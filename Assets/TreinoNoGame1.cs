@@ -8,7 +8,8 @@ public class TreinoNoGame1 : MonoBehaviour
 
     public GameObject FundoPrefab; 
 
-    public GameObject InimigoPrefab;
+    public GameObject[] inimigoPrefab;
+
     [SerializeField]
     float SpawnarInimigosInicial;
     [SerializeField]
@@ -17,7 +18,7 @@ public class TreinoNoGame1 : MonoBehaviour
     [SerializeField]
     float DistanciaDoinimigoDoPlayer;
 
-    public Player player_ref;
+    public Game player_ref;
 
     [SerializeField]
     float DistanciaDoChao =-2.63f;
@@ -72,23 +73,23 @@ public class TreinoNoGame1 : MonoBehaviour
             PosicaoInicial.x += DistanciaDoinimigoDoPlayer; //+=??
             PosicaoInicial.y = DistanciaDoChao;
 
-            SpawnarInimigos(Random.Range(2, 3), (Random.Range(1, 6), PosicaoInicial);
+            SpawnarInimigos(Random.Range(2, 3), Random.Range(1, 6), PosicaoInicial);
 
         }
          
 
         
     }
-    public void SpawnarInimigos(int QuantidadeDeInimigos,int Distancia,Vector2 PosicaoInicial)
+    public void SpawnarInimigos(int QuantidadeDeInimigos,float Distancia,Vector2 PosicaoInicial)
     {
         for(int i=0;i<QuantidadeDeInimigos;i++)
         {
-            int Index = Random.Range(0, InimigoPrefab.Length);// length??
-            Vector3 Posicao = PosicaoInicial;//pq usar vector3?
-            Posicao.x += i * Distancia;// +=??
+            int index = Random.Range(0, inimigoPrefab.Length);
+            Vector3 Posicao = PosicaoInicial;
+            Posicao.x += i * Distancia;
             Posicao.z = -1f;
 
-            GameObject fa = Instantiate(InimigoPrefab[Index], Posicao, Quaternion.identity);
+            GameObject fa = Instantiate(inimigoPrefab[index], Posicao, Quaternion.identity);
 
         }
     }

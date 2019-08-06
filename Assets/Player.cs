@@ -2,8 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Game : MonoBehaviour
 {
+    [SerializeField]
+    float spawnarEspadaInicial;
+
+    [SerializeField]
+    float spawnarEspadaMax;
+
+    [SerializeField]
+    private int quantidadeEspada =1;
+
+    [SerializeField]
+    bool recarregar=false;
+
+
+
+    [SerializeField]
+    float distanciaEspadaChao= -2.852001f;
+
+    public GameObject EspadaPrefab;
+
     [SerializeField]
     float speed;
     [SerializeField]
@@ -42,6 +61,10 @@ public class Player : MonoBehaviour
             {
                 Jump();
             }
+            else if(Input.touches[0].phase==TouchPhase.Moved)
+            {
+                SpawnarEspada(quantidadeEspada);
+            } 
         }
 
 
@@ -50,10 +73,24 @@ public class Player : MonoBehaviour
 
         
 #else
+        
+
+
         if (Input.GetKeyDown(KeyCode.Space) && game_Ref.isGameOver() == false && isGrounded)
         {
             Jump();
         }
+
+        if (Time.time >= spawnarEspadaInicial + spawnarEspadaMax && recarregar == true)
+        {
+            spawnarEspadaInicial = Time.time;
+        }
+        else if (recarregar == false && Input.GetKeyDown(KeyCode.P) && game_Ref.isGameOver() == false)
+        {
+            SpawnarEspada(quantidadeEspada);
+            recarregar = true;
+        }
+
 
 #endif
 
@@ -108,5 +145,13 @@ public class Player : MonoBehaviour
             isGrounded = false;
         }
     }
+    public void SpawnarEspada(int DistanciaEspadaPlayer)
+    {
+        Vector2 Inicialpos = transform.position;
+        Vector2 position = Inicialpos;
+        position.x += DistanciaEspadaPlayer;
+        position.y = distanciaEspadaChao;
 
+        GameObject go = Instantiate(EspadaPrefab, position, Quaternion.identity);
+    }  
 }   
