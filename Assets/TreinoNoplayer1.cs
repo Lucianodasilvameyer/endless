@@ -19,6 +19,8 @@ public class TreinoNoPlayer1 : MonoBehaviour
     [SerializeField]
     private float distanciaChaoEspada; 
 
+
+
     [SerializeField]
     private float speed;
 
@@ -52,7 +54,7 @@ public class TreinoNoPlayer1 : MonoBehaviour
             }
             else if(Input.touches[0].phase==TouchPhase.Moved)
             {
-                SpawnarEspada();
+                SpawnarEspada(2);
             }  
         }
 
@@ -73,7 +75,7 @@ public class TreinoNoPlayer1 : MonoBehaviour
         } 
         else if(Input.GetKeyDown(KeyCode.P) && game_ref.isGameOver()==false && recarregar==false)
         {
-            SpawnarEspada();
+            SpawnarEspada(2);
         }
 
 
@@ -127,10 +129,9 @@ public class TreinoNoPlayer1 : MonoBehaviour
             isGrounded = false;
         }
     }
-    public void SpawnarEspada(int distanciaPlayerEspada)
+    public void SpawnarEspada(float distanciaPlayerEspada)
     {
-        Vector2 posicaoInicial = transform.position;
-        Vector2 position = posicaoInicial;
+        Vector2 position =  transform.position;
         position.x += distanciaPlayerEspada;
         position.y = distanciaChaoEspada;
 

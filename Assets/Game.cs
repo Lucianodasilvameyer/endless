@@ -20,7 +20,7 @@ public class Game : MonoBehaviour
     public GameObject BackGroundPrefab;
     public GameObject groundPrefab;
 
-    public Game player_ref;// o Player é o script
+    public Player player_ref;// o Player é o script
 
     [SerializeField]
     float distanceEnemyFromPlayer;
@@ -66,7 +66,7 @@ public class Game : MonoBehaviour
         initialPos.x += distanceEnemyFromPlayer;
         initialPos.y = groundLevel;
 
-        SpawnarInimigos(3,5, initialPos);
+        //SpawnarInimigos(3,5, initialPos);
 
         timerRespawnInimigos = Time.time;
 
@@ -87,21 +87,22 @@ public class Game : MonoBehaviour
 
 
 
-            SpawnarInimigos(Random.Range(2,3), Random.Range(1,6), initialPos);
+            SpawnarInimigos(Random.Range(2,5), 1, 6 , Random.Range(0, 5), initialPos);// o 1,6 são respectivamente a distanceMin e distanceMax entre os inimigos?
         }
        
         
 
 
     }
-    public void SpawnarInimigos( int quantidadeIinimigos, float distance, Vector2 initialPos)
+    public void SpawnarInimigos( int quantidadeIinimigos, float distanceMin, float distanceMax, float heightMax, Vector2 initialPos)
     {
 
         for(int i = 0; i < quantidadeIinimigos;i++)
         {
             int index = Random.Range(0, inimigoPrefabs.Length);//de zero ao tamanho do inimigoPrefabs?
             Vector3 position = initialPos;  //pq mecher com vector3 se este jogo é 2d?
-            position.x += i * distance;
+            position.x += i * Random.Range(distanceMin,distanceMax); //colocando o random.range aqui em baixo a localização dos inimigos ira sempre mudando ao chamar a função
+            position.y += Random.Range(0, heightMax);
             position.z = -1f;  //-1f pq o z é sempre o mesmo?
             GameObject go = Instantiate(inimigoPrefabs[index], position, Quaternion.identity);
 

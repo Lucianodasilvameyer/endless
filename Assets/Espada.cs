@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Espada : MonoBehaviour
 {
-    [SerializeField]
-    Inimigo inimigo;
+
 
     [SerializeField]
     private float speed;
@@ -18,7 +17,8 @@ public class Espada : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (!body || body == null)            //não precisa usar o GameObject.findGameObjectwithtag pq o rigidbody ja esta na hierarca da espada;
+            body = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -26,13 +26,14 @@ public class Espada : MonoBehaviour
     {
         MoverEspada();
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("inimigo"))
+        if (collision.gameObject.CompareTag("Inimigo"))
         {
-            Destroy(inimigo);
+            Destroy(collision.gameObject);
             Destroy(gameObject);
-        }  
+        }
     }
     public void MoverEspada()
     {
