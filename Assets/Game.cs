@@ -1,13 +1,48 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Game : MonoBehaviour
 {
+    [SerializeField]
+    private int taxaDePontos;
+
+    [SerializeField]
+    private float pontuacaoInicio;
+
+    [SerializeField]
+    Button botaoReiniciar;
+
+    [SerializeField]
+    private int pontuacaoMax;
+
+    public TextMeshProUGUI textoScore;
 
 
+    public TextMeshProUGUI textoGameOver;
 
+    [SerializeField]
+    private int scoreCount;
 
+    public int ScoreCount
+    {
+        get
+        {
+            return scoreCount;
+        }
+        set
+        {
+            if (value < 0)
+                scoreCount = 0; 
+            else scoreCount = value;       //tem q usar get e set por que toda a vez que muda a propriedade tem q fazer tambem outra tarefa(neste caso garantir q o novo valor não seja menor q zero e atualizar o texto da pontuação)
+
+            textoScore.text = "Score " + scoreCount;
+
+        }
+    }
 
     private float timerRespawnInimigos;
 
@@ -34,6 +69,7 @@ public class Game : MonoBehaviour
     [SerializeField]
     Vector2 nextPositionGR;
     bool gameOver = false;
+    
 
     Queue<GameObject> poolBG = new Queue<GameObject>();
     Queue<GameObject> poolGR = new Queue<GameObject>();
@@ -70,6 +106,7 @@ public class Game : MonoBehaviour
 
         timerRespawnInimigos = Time.time;
 
+        ScoreCount=0;
 
     }
 
@@ -89,8 +126,14 @@ public class Game : MonoBehaviour
 
             SpawnarInimigos(Random.Range(2,5), 1, 6 , Random.Range(0, 5), initialPos);// o 1,6 são respectivamente a distanceMin e distanceMax entre os inimigos?
         }
-       
+
+        if (Time.time >= pontuacaoInicio + pontuacaoMax && player_ref.isPlayerDead()==false)
+        {
+            pontuacaoInicio = Time.time;
+            ScoreCount += taxaDePontos;
+        }
         
+
 
 
     }
@@ -148,9 +191,19 @@ public class Game : MonoBehaviour
 
     public void  GameOver()
     {
+        textoGameOver.text = "GameOver";
         gameOver = true;
         player_ref.GetComponent<SpriteRenderer>().enabled = false;
         // mensgaem de gameover
+
+        botaoReiniciar.gameObject.SetActive(true);
+    }
+    public void Reiniciar()
+    {
+        botaoReiniciar.gameObject.SetActive(false);
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        
     }
 
 }

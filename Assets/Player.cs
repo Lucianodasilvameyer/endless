@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class Player : MonoBehaviour
 {
@@ -12,6 +14,48 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     float distanciaEspadaPlayer;
+
+    [SerializeField]
+    int vidaInicial; //quando não tem o tipo de visibilidade ela é private
+
+    [SerializeField]
+    int vidaMax;
+
+    
+
+
+
+    [SerializeField]
+    private int vida;
+
+    public int Vida
+    {
+        get
+        {
+            return vida;
+        }
+        set
+        {
+            if (value <= 0)
+            {    vida = 0;
+                isDead = true;
+                game_Ref.GameOver();
+                
+            }
+            else if(value>vidaMax)
+            {
+                vida = vidaMax;
+            }
+            else
+            vida = value;       //tem q usar get e set por que toda a vez que muda a propriedade tem q fazer tambem outra tarefa(neste caso garantir q o novo valor não seja menor q zero e atualizar o texto da pontuação)
+
+            slider_.value = (float)vida / (float)vidaMax;//aqui a variavel vida ja avia sido criada
+
+        }
+    }
+
+
+    public Slider slider_;
 
     bool touchMoving = true;
     bool touchingStationary = true;
@@ -44,9 +88,14 @@ public class Player : MonoBehaviour
     [SerializeField]
     Game game_Ref;
 
+    bool isDead = false;
+    
+
     // Start is called before the first frame update
     void Start()
     {
+        Vida = vidaInicial; //esta é a vida public
+
         if (!game_Ref || game_Ref == null)   //aqui verifica se o Game tem uma referencia ou não(apontando para uma classe e ganhando dados)
             game_Ref = GameObject.FindGameObjectWithTag("Game"). GetComponent<Game>();
 
@@ -69,7 +118,7 @@ public class Player : MonoBehaviour
 
 #if UNITY_ANDROID
 
-          if(Input.touches.Length == 1)
+          if(Input.touches.Length == 1 && !isDead)
         {
           
             if(Input.touches[0].phase == TouchPhase.Began || (Input.touches[0].phase == TouchPhase.Stationary && !touchingStationary))
@@ -107,13 +156,13 @@ public class Player : MonoBehaviour
 
 
 
-        if (Input.GetKeyDown(KeyCode.Space) && game_Ref.isGameOver() == false)
+        if (Input.GetKeyDown(KeyCode.Space) && game_Ref.isGameOver() == false && !isDead)
         {
             Jump();
         }
 
        
-        else if (recarregar == false && Input.GetKeyDown(KeyCode.P) && game_Ref.isGameOver() == false)
+        else if (recarregar == false && Input.GetKeyDown(KeyCode.P) && game_Ref.isGameOver() == false && !isDead)
         {
             SpawnarEspada(distanciaEspadaPlayer);
             recarregar = true;
@@ -169,7 +218,9 @@ public class Player : MonoBehaviour
             if (!invencivel)
             {
                 GetComponent<SpriteRenderer>().color = Color.red;
-                game_Ref.GameOver();
+                
+
+                Vida--;
             }
          
            
@@ -199,5 +250,9 @@ public class Player : MonoBehaviour
         position.z = -1;
 
         GameObject go = Instantiate(EspadaPrefab, position, Quaternion.identity);
-    }  
+    } 
+    public bool isPlayerDead()
+    {
+        return isDead;
+    }
 }   
