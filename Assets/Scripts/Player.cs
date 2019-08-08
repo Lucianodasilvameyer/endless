@@ -21,8 +21,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     int vidaMax;
 
-    
 
+    [SerializeField]
+    Animator anim;
 
 
     [SerializeField]
@@ -81,6 +82,20 @@ public class Player : MonoBehaviour
     Rigidbody2D body;
     [SerializeField]
     bool isGrounded;
+    public bool IsGrounded
+    {
+        get
+        {
+            return isGrounded;
+        }
+
+        set
+        {
+            isGrounded = value;
+
+            anim.SetBool("isGrounded", isGrounded);
+        }
+    }
 
     [SerializeField]
     bool invencivel;
@@ -97,10 +112,13 @@ public class Player : MonoBehaviour
         Vida = vidaInicial; //esta é a vida public
 
         if (!game_Ref || game_Ref == null)   //aqui verifica se o Game tem uma referencia ou não(apontando para uma classe e ganhando dados)
-            game_Ref = GameObject.FindGameObjectWithTag("Game"). GetComponent<Game>();
+            game_Ref = GameObject.FindGameObjectWithTag("Game"). GetComponent<Game>();//aqui o ! e o null devem ser sempre utilizados para ver se a referencia foi feita ou não
 
         if (!body || body == null)   //aqui verifica se o rigdbody tem uma referencia ou não(apontando para uma classe e ganhando dados)
         body = GetComponent<Rigidbody2D>();
+
+        if (!anim || anim == null)
+            anim = GetComponent<Animator>();
 
         //if(invencivel)
            // GetComponent<SpriteRenderer>().color = Color.blue;
@@ -112,7 +130,7 @@ public class Player : MonoBehaviour
 
         if(body.velocity.y == 0 && transform.position.y <= distanciaEspadaChao + 0.5f)
         {
-            isGrounded = true;
+            IsGrounded = true;
         }
 
 
@@ -202,7 +220,7 @@ public class Player : MonoBehaviour
     public void Jump()
     {
 
-      if(isGrounded==false)
+      if(IsGrounded == false)
         {
             return;
         }
@@ -231,7 +249,7 @@ public class Player : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Ground"))
         {
-            isGrounded = true;
+            IsGrounded = true;
         }
     }
 
@@ -239,7 +257,7 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            isGrounded = false;
+            IsGrounded = false;
         }
     }
     public void SpawnarEspada(float DistanciaEspadaPlayer)
