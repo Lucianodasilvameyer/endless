@@ -221,9 +221,9 @@ public class Player : MonoBehaviour
     {
 
       if(IsGrounded == false)
-        {
+      {
             return;
-        }
+      }
 
         Vector2 velocity = new Vector2(body.velocity.x, jumpForce);//aqui no movimento o body.velocity.x serve para manter a velocidade do x
         body.velocity = velocity;

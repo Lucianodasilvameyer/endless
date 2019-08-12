@@ -98,15 +98,15 @@ public class Game : MonoBehaviour
 
         }
 
-        Vector2 initialPos = player_ref.transform.position;
-        initialPos.x += distanceEnemyFromPlayer;
-        initialPos.y = groundLevel;
+        Vector2 initialPos = player_ref.transform.position;//??
+        initialPos.x += distanceEnemyFromPlayer;//??
+        initialPos.y = groundLevel;//??
 
-        //SpawnarInimigos(3,5, initialPos);
+        //SpawnarInimigos(3,5, initialPos);//??
 
-        timerRespawnInimigos = Time.time;
+        timerRespawnInimigos = Time.time;//??
 
-        ScoreCount=0;
+        ScoreCount=0;//??
 
     }
 
